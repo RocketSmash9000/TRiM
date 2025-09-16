@@ -1,0 +1,63 @@
+/* Dark Theme for TRiM Player */
+.root {
+    -fx-base: #2b2b2b;
+    -fx-background: #1e1e1e;
+    -fx-control-inner-background: #2d2d2d;
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #555555;
+    -fx-border-radius: 3px;
+}
+
+.button:hover {
+    -fx-background-color: #4c5052;
+}
+
+.button:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* Progress Bar */
+.progress-bar {
+    -fx-accent: #4a9cff;
+}
+
+.progress-bar > .track {
+    -fx-background-color: #3c3f41;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.progress-bar > .bar {
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #e0e0e0;
+}
+
+/* Context Menu */
+.context-menu {
+    -fx-background-color: #3c3f41;
+    -fx-text-fill: #e0e0e0;
+}
+
+.menu-item:focused {
+    -fx-background-color: #4a9cff;
+}
+
+/* Text Input */
+.text-input {
+    -fx-background-color: #2d2d2d;
+    -fx-text-fill: #e0e0e0;
+    -fx-prompt-text-fill: #808080;
+    -fx-border-color: #555555;
+    -fx-border-radius: 3px;
+}

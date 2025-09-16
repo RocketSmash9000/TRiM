@@ -1,0 +1,43 @@
+// Java code converted to TXT so that the plugin doesn't load
+// This plugin adds a simple button that will print something to the console
+
+package com.github.RocketSmash9000.plugin.example;
+
+import com.github.RocketSmash9000.plugin.ui.ToolbarButtonExtension;
+import javafx.scene.Node;
+import javafx.scene.text.Text;
+import org.pf4j.Extension;
+import org.pf4j.ExtensionPoint;
+
+/**
+ * Example toolbar button contributed by the Example plugin.
+ */
+@Extension
+public class ExampleToolbarButton implements ToolbarButtonExtension, ExtensionPoint {
+
+    @Override
+    public String getText() {
+        return "Hello";
+    }
+
+    @Override
+    public String getTooltip() {
+        return "Say hello from ExamplePlugin";
+    }
+
+    @Override
+    public Node getGraphic() {
+        // Simple text icon. In real plugins, you may return an ImageView with an icon.
+        return new Text("🙂");
+    }
+
+    @Override
+    public String getStyle() {
+        return "-fx-min-width: 60px;";
+    }
+
+    @Override
+    public void onAction() {
+        System.out.println("[ExampleToolbarButton] Hello from toolbar button!");
+    }
+}

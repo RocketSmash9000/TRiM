@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.cell.CheckBoxListCell?>
+
+<DialogPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/plugin-manager.css">
+    <header>
+        <Text style="-fx-font-size: 1.2em; -fx-font-weight: bold;">Plugin Manager</Text>
+        <Text style="-fx-font-size: 0.9em; -fx-opacity: 0.8;">Enable or disable plugins</Text>
+    </header>
+    
+    <content>
+        <VBox spacing="10">
+            <ListView fx:id="pluginList" VBox.vgrow="ALWAYS" />
+            <Label fx:id="descriptionLabel" wrapText="true" maxWidth="1.7976931348623157E308" />
+        </VBox>
+    </content>
+</DialogPane>
