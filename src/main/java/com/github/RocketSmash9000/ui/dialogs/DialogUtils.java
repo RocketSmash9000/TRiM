@@ -6,11 +6,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.net.URL;
 import java.util.Optional;
 
 /**
@@ -34,19 +34,32 @@ public class DialogUtils {
             dialog.initOwner(owner);
         }
 
-        // Set the dialog icon
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        try {
-            Image icon = new Image(DialogUtils.class.getResourceAsStream("/images/app-icon.png"));
-            stage.getIcons().add(icon);
-        } catch (Exception e) {
-            // Icon not found, use default
-            System.err.println("Could not load application icon: " + e.getMessage());
-        }
+        // Set the dialog icon once the window is shown (scene is available)
+        dialog.setOnShown(ev -> {
+            try {
+                Window w = dialog.getDialogPane().getScene().getWindow();
+                if (w instanceof Stage s) {
+                    URL iconUrl = DialogUtils.class.getResource("/images/app-icon.png");
+                    if (iconUrl != null) {
+                        s.getIcons().add(new Image(iconUrl.toExternalForm()));
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load application icon: " + e.getMessage());
+            }
+        });
 
         DialogPane dialogPane = dialog.getDialogPane();
-        dialogPane.setContent(content);
-        dialogPane.getButtonTypes().add(ButtonType.CLOSE);
+        if (content instanceof DialogPane providedPane) {
+            // If FXML root is a DialogPane, use it directly
+            dialog.setDialogPane(providedPane);
+            if (providedPane.getButtonTypes().isEmpty()) {
+                providedPane.getButtonTypes().add(ButtonType.CLOSE);
+            }
+        } else {
+            dialogPane.setContent(content);
+            dialogPane.getButtonTypes().add(ButtonType.CLOSE);
+        }
         
         // Set minimum size
         dialogPane.setMinWidth(500);
@@ -91,14 +104,20 @@ public class DialogUtils {
             alert.initOwner(owner);
         }
 
-        // Set the dialog icon
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        try {
-            Image icon = new Image(DialogUtils.class.getResourceAsStream("/images/app-icon.png"));
-            stage.getIcons().add(icon);
-        } catch (Exception e) {
-            System.err.println("Could not load application icon: " + e.getMessage());
-        }
+        // Set the dialog icon once the window is shown (scene is available)
+        alert.setOnShown(ev -> {
+            try {
+                Window w = alert.getDialogPane().getScene().getWindow();
+                if (w instanceof Stage s) {
+                    URL iconUrl = DialogUtils.class.getResource("/images/app-icon.png");
+                    if (iconUrl != null) {
+                        s.getIcons().add(new Image(iconUrl.toExternalForm()));
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load application icon: " + e.getMessage());
+            }
+        });
 
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;
@@ -114,14 +133,20 @@ public class DialogUtils {
             alert.initOwner(owner);
         }
 
-        // Set the dialog icon
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        try {
-            Image icon = new Image(DialogUtils.class.getResourceAsStream("/images/app-icon.png"));
-            stage.getIcons().add(icon);
-        } catch (Exception e) {
-            System.err.println("Could not load application icon: " + e.getMessage());
-        }
+        // Set the dialog icon once the window is shown (scene is available)
+        alert.setOnShown(ev -> {
+            try {
+                Window w = alert.getDialogPane().getScene().getWindow();
+                if (w instanceof Stage s) {
+                    java.net.URL iconUrl = DialogUtils.class.getResource("/images/app-icon.png");
+                    if (iconUrl != null) {
+                        s.getIcons().add(new Image(iconUrl.toExternalForm()));
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Could not load application icon: " + e.getMessage());
+            }
+        });
 
         alert.showAndWait();
     }

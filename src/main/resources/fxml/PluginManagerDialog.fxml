@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.control.cell.CheckBoxListCell?>
 
-<DialogPane xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../css/plugin-manager.css">
+<DialogPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.RocketSmash9000.ui.PluginManagerController" stylesheets="@../css/plugin-manager.css">
     <header>
         <Text style="-fx-font-size: 1.2em; -fx-font-weight: bold;">Plugin Manager</Text>
         <Text style="-fx-font-size: 0.9em; -fx-opacity: 0.8;">Enable or disable plugins</Text>

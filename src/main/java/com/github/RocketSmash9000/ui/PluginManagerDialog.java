@@ -39,23 +39,23 @@ public class PluginManagerDialog {
         try {
             // Load the FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PluginManagerDialog.fxml"));
-            
-            // Explicitly set controller because FXML does not declare fx:controller
-            loader.setController(new PluginManagerController(pluginManager));
-            
+
+            // Use a controller factory so GraalVM can discover the controller via fx:controller
+            loader.setControllerFactory(clazz -> new PluginManagerController(pluginManager));
+
             // Load the root node
             Parent root = loader.load();
-            
+
             // Show the dialog
             DialogUtils.showDialog("Plugin Manager", root, owner);
-            
+
         } catch (IOException e) {
             System.err.println("Failed to load plugin manager dialog: " + e.getMessage());
             e.printStackTrace();
-            
+
             // Fallback to a simple alert if FXML loading fails
-            DialogUtils.showErrorDialog("Error", 
-                "Failed to load the plugin manager. Please check the logs for details.", 
+            DialogUtils.showErrorDialog("Error",
+                "Failed to load the plugin manager. Please check the logs for details.",
                 owner);
         }
     }
